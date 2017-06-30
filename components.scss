@@ -1,0 +1,85 @@
+$before-screen-prefix: null;
+
+@each $screen-prefix, $sizes in map-reverse(get-screens-map()) {
+    @media(min-width: get-screen-size($screen-prefix, min)) {
+        @if $gridi-helpers-text-alignment-screens-support-generate-from-classes and index($gridi-helpers-text-alignment-screens-support-from-classes-skip-screens, $screen-prefix) == null {
+            .text-from-#{$screen-prefix}-left {
+                text-align: left;
+            }
+
+            .text-from-#{$screen-prefix}-right {
+                text-align: right;
+            }
+
+            .text-from-#{$screen-prefix}-center {
+                text-align: center;
+            }
+
+            .text-from-#{$screen-prefix}-justify {
+                text-align: justify;
+            }
+        }
+
+        @if not $before-screen-prefix {
+            @if $gridi-helpers-text-alignment-screens-support-generate-only-classes and index($gridi-helpers-text-alignment-screens-support-only-classes-skip-screens, $screen-prefix) == null {
+                .text-#{$screen-prefix}-left {
+                    text-align: left;
+                }
+
+                .text-#{$screen-prefix}-right {
+                    text-align: right;
+                }
+
+                .text-#{$screen-prefix}-center {
+                    text-align: center;
+                }
+
+                .text-#{$screen-prefix}-justify {
+                    text-align: justify;
+                }
+            }
+        }
+    }
+
+    @if $gridi-helpers-text-alignment-screens-support-generate-to-classes and index($gridi-helpers-text-alignment-screens-support-to-classes-skip-screens, $screen-prefix) == null {
+        @media(max-width: get-screen-size($screen-prefix, max)) {
+            .text-to-#{$screen-prefix}-left {
+                text-align: left;
+            }
+
+            .text-to-#{$screen-prefix}-right {
+                text-align: right;
+            }
+
+            .text-to-#{$screen-prefix}-center {
+                text-align: center;
+            }
+
+            .text-to-#{$screen-prefix}-justify {
+                text-align: justify;
+            }
+        }
+    }
+
+    @if $before-screen-prefix and $gridi-helpers-text-alignment-screens-support-generate-only-classes and index($gridi-helpers-text-alignment-screens-support-only-classes-skip-screens, $screen-prefix) == null {
+        @media(min-width: get-screen-size($screen-prefix, min)) and (max-width: get-screen-size($before-screen-prefix, max)) {
+            .text-#{$screen-prefix}-left {
+                text-align: left;
+            }
+
+            .text-#{$screen-prefix}-right {
+                text-align: right;
+            }
+
+            .text-#{$screen-prefix}-center {
+                text-align: center;
+            }
+
+            .text-#{$screen-prefix}-justify {
+                text-align: justify;
+            }
+        }
+    }
+
+    $before-screen-prefix: $screen-prefix;
+}
